@@ -1,0 +1,44 @@
+ 
+body{
+    background-color: black;
+    font-family: "monospace";
+    color: #1DB954;
+    text-align: center;
+}
+
+#title{
+    border: "2px";
+    background-color: #1DB954;
+    color: black;
+    font-size: 30px;
+    border: 3px solid #1DB954;
+    border-radius: 40px;
+    text-align: center;
+}
+
+.center {
+    margin: auto;
+    width: 30%;
+    border: 3px solid #1DB954;
+    padding: 20px;
+    border-radius: 40px;
+    background-color: #1DB954;
+    position: relative;
+    top: 30px;
+    color: black;
+    
+  }
+
+.mt-3{
+    margin-top: 3px;
+}
+
+#titleN{
+    border: "2px";
+    background-color: #1DB954;
+    color: black;
+    font-size: 30px;
+    border: 3px solid #1DB954;
+    border-radius: 40px;
+    text-align: center;
+}
