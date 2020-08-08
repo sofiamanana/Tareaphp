@@ -6,7 +6,6 @@
         $cant_mg = 0;
         $nombre_can = $_POST['nom_can'];
         $a_laz = $_POST['año_lanz'];
-        $nom_album = $_POST['nom_alb'];
         
         $sql = "SELECT * FROM Artistas WHERE ID_PERSONA = ?;";
         $sentencia = $pdo->prepare($sql);
@@ -75,12 +74,7 @@
                 <label for="exampleInputEmail1">Año de lanzamiento:</label>
                 <input type="text" class="form-control" aria-describedby="emailHelp" name="año_lanz">
             
-            </div>
-            <div class="form-group div_none">
-                <label for="exampleInputEmail1">Nombre Album:</label>
-                <p class="text">(Si no pertenece a ningún album, dejar en blanco)</p>
-                <input type="text" class="form-control" id="exampleInputEmail1" name="nom_alb">
-            </div>         
+            </div>       
             <button type="submit" class="btn btn-dark mt-3">Agregar canción</button>   
         </form>
     </div>    

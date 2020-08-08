@@ -30,11 +30,9 @@
         $sen = $sentencia->fetchAll();
 
         if(count($sen)==0){
-            $sql = "INSERT INTO Playlist (Nom_Playlist) VALUES (?);";
+            $sql = "INSERT INTO Playlist (Nom_Playlist,Cant_Canciones) VALUES (?,?);";
             $sentencia = $pdo->prepare($sql);
-            $sentencia->execute(array($nom_playlist));
-    
-            echo "lalala";
+            $sentencia->execute(array($nom_playlist,0));
     
             $sql = "SELECT * FROM Playlist WHERE Nom_Playlist = ?;";
             $sentencia = $pdo->prepare($sql);

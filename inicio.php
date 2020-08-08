@@ -23,13 +23,20 @@
             </p>
         </form>
             <h1>POYOFY</h1>
+            <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
         </div>
         <div>
+            <form action="ver_playlist.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver mis Playlist</button>
+            </form>
             <form action="crear_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Crear Playlist</button>
             </form>
             <form action="editar_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Editar Playlist</button>
+            </form>
+            <form action="canciones_MG.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Canciones que MG</button>
             </form>
             
         </div>

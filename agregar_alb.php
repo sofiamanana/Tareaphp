@@ -24,7 +24,7 @@
         $nom_alb = $_POST['nom_alb'];
         $a_lanz = $_POST['año_lanz'];
 
-        $sql = "INSERT INTO Albumes (ID_Artista,Nom_Album,Cant_Canciones,A_LanzamientoA) VALUES (?,?,?,?);";
+        $sql = "INSERT INTO Albumes (ID_Artista,Nom_Album,Cant_Canciones,A_Lanzamiento) VALUES (?,?,?,?);";
         $sentencia = $pdo->prepare($sql);
         $sentencia->execute(array($id_artista,$nom_alb,0,$a_lanz));
         $sql = "SELECT * FROM Albumes WHERE Nom_Album = ?;";

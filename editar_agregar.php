@@ -68,6 +68,11 @@
 </head>
 <body>
     <div id="titleN">
+        <form action="inicio_artista.php">
+            <p id="par">
+                <button type="submit" class="btn btn-dark float-right ml-3">Inicio</button>
+            </p>
+        </form>
         <h1>Poyofy Editar Album</h1>
     </div>
     <div class="center">
@@ -93,7 +98,7 @@
                 endforeach; ?>
             </div>
                     
-            <button type="submit" class="butn btn-primary mt-3">Actualizar</button>   
+            <button type="submit" class="btn btn-dark mt-3">Actualizar</button>   
         </form>
     </div>    
 </body>

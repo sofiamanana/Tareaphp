@@ -17,10 +17,10 @@
 <body>
     <div id="titleN">
         <form action="inicio.php">
-                <p id="par">
-                    <button type="submit" class="btn btn-dark float-right ml-3">Inicio</button>
-                </p>
-            </form>
+            <p id="par">
+                <button type="submit" class="btn btn-dark float-right ml-3">Inicio</button>
+            </p>
+        </form>
         <h1>Poyofy Editar Playlist</h1>
         <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
        
@@ -42,7 +42,7 @@
             </form> 
         </div>  
         <div>
-            <form action="borrar_can.php">
+            <form action="borrar_playlist.php">
                 <button type="submit" class="btn btn-dark float-center mt-3">Borrar Playlist</button>
             </form> 
         </div>              

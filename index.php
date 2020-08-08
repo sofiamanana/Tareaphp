@@ -37,7 +37,7 @@
             else{
                 $sql = "SELECT * FROM Artistas WHERE ID_PERSONA = ?;";
                 $sentencia = $pdo->prepare($sql);
-                $sentencia->execute(array($_SESSION['id_persona']));
+                $sentencia->execute(array($id_persona));
                 $sen = $sentencia->fetchAll();
 
                 if(count($sen)==0){
