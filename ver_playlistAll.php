@@ -17,7 +17,7 @@
 
     $id_usuario = $sen[0]['ID_Usuario'];
 
-    $sql = "SELECT ID_Playlist FROM Usuario_Crea WHERE ID_Usuario = ?;";
+    $sql = "SELECT ID_Playlist FROM Usuario_Crea;";
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute(array($id_usuario));
     $ids_play = $sentencia->fetchAll();
@@ -31,10 +31,7 @@
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute();
     $canciones = $sentencia->fetchAll();
-
-
-
-    
+   
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +56,7 @@
             <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
         </div>
         <div>            
-            <h3 style="color:white; text-align:left;" class="mt-3 ml-3">Mis Playlist:</h3>
+            <h3 style="color:white; text-align:left;" class="mt-3 ml-3">Todas las Playlist:</h3>
         </div>
         <div>
             <div class="form-group">

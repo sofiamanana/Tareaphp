@@ -20,7 +20,6 @@
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute(array($id_artista));
     $canciones = $sentencia->fetchAll();
-    var_dump($_POST);
     
     if(isset($_POST)){        
         if(count($_POST)==1){  
@@ -33,8 +32,8 @@
                     $sentencia->execute(array($nom_can));
                 }
             }
-            /*
-            header('location:borrar_can.php');*/
+            
+            header('location:inicio_artista.php');
         }       
     }
     

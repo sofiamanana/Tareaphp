@@ -20,7 +20,6 @@
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute();
     $canciones = $sentencia->fetchAll();
-    var_dump($_POST);
     if($_POST){
         $nom_playlist = $_POST['nom_playlist'];
 
