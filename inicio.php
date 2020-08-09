@@ -1,8 +1,6 @@
 <?php
     include_once "conexion.php";
-    session_start();
-
-    
+    session_start();    
 ?>
 
 <!DOCTYPE html>
@@ -29,6 +27,9 @@
             <form action="ver_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver mis Playlist</button>
             </form>
+            <form action="ver_playlistAll.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Todas las Playlist</button>
+            </form>
             <form action="crear_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Crear Playlist</button>
             </form>
@@ -37,6 +38,12 @@
             </form>
             <form action="canciones_MG.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Canciones que MG</button>
+            </form>
+            <form action="ver_canciones.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Todas las Canciones</button>
+            </form>
+            <form action="ver_albums.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Albums</button>
             </form>
             
         </div>

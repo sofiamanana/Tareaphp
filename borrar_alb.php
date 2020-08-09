@@ -27,6 +27,18 @@
             foreach($albums as $alb){
                 $nom_alb = $alb['Nom_Album'];
                 if(isset($_POST[$nom_alb])){
+
+                    $sql = "SELECT * FROM Canciones WHERE ID_Album = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($alb['ID_Album']));
+                    $canciones = $sentencia->fetchAll();
+
+                    foreach($canciones as $can){
+                        $sql = "UPDATE Canciones SET ID_Album = ? WHERE ID_Cancion = ?;";
+                        $sentencia = $pdo->prepare($sql);
+                        $sentencia->execute(array(NULL,$can['ID_Cancion']));
+                    }
+
                     $sql = "DELETE FROM Albumes WHERE Nom_Album = ?;";
                     $sentencia = $pdo->prepare($sql);
                     $sentencia->execute(array($nom_alb));
@@ -35,10 +47,6 @@
             }
             header('location:editar_alb.php');
         }
-        else{
-            echo "No se pueden editar dos nombres de albums a la vez, seleccione solo uno";
-        }      
-
         
     }
     unset($_POST);
@@ -56,6 +64,11 @@
 </head>
 <body>
     <div id="titleN">
+        <form action="inicio.php">
+                <p id="par">
+                    <button type="submit" class="btn btn-dark float-right mr-3 ml-3">Inicio</button>
+                </p>
+            </form>
         <h1>Poyofy Editar Album</h1>
     </div>
     <div class="center">
@@ -70,7 +83,7 @@
                 <?php endforeach; ?>
             </div>
                  
-            <button type="submit" class="butn btn-dark mt-3">Actualizar</button>   
+            <button type="submit" class="butn btn-dark mt-3">Borrar</button>   
         </form>
     </div>    
 </body>
