@@ -2,10 +2,8 @@
 <?php
     include_once "conexion.php";
     session_start();
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,7 +37,7 @@
             </form>
         </div>
         <div>
-            <form action="borrar_can.php">
+            <form action="borrar_cancion.php">
                 <button type="submit" class="btn btn-dark float-center mt-3">Borrar Cancion</button>
             </form> 
         </div>                

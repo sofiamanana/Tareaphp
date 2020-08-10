@@ -2,8 +2,8 @@
 <?php
     include_once "conexion.php";
     session_start();
-?>
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,42 +16,45 @@
 </head>
 <body>
     <div id="titleN">
-        <form action="inicio_artista.php">
+        <form action="inicio.php">
                 <p id="par">
                     <button type="submit" class="btn btn-dark float-right ml-3">Inicio</button>
                 </p>
             </form>
         <h1>Poyofy Editar Cuenta</h1>
         <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
-       
     </div>
     <div class="center">
         <div>
-            <form action="editar_nombre_alb.php">
-                <button type="submit" class="btn btn-dark float-center mt-3">Editar Nombre del Album</button>
+            <form action="editar_usuario.php">
+                <button type="submit" class="btn btn-dark float-center mt-3">Editar usuario</button>
             </form>  
         </div>
         <div>
-            <form action="editar_alanz.php">
-                <button type="submit" class="btn btn-dark float-center mt-3">Editar Año de Lanzamiento</button>
+            <form action="editar_contra.php">
+                <button type="submit" class="btn btn-dark float-center mt-3">Editar contraseña</button>
             </form>
         </div>
         <div>
-            <form action="editar_agregar.php">
-                <button type="submit" class="btn btn-dark float-center mt-3">Agregar Canciones</button>
+            <form action="editar_nombre.php">
+                <button type="submit" class="btn btn-dark float-center mt-3">Editar nombre</button>
             </form> 
         </div>
         <div>
             <form action="editar_apellido.php">
-                <button type="submit" class="btn btn-dark float-center mt-3">Quitar Canciones</button>
+                <button type="submit" class="btn btn-dark float-center mt-3">Editar apellido</button>
             </form> 
         </div>
         <div>
-            <form action="borrar_alb.php">
-                <button type="submit" class="btn btn-dark float-center mt-3">Borrar Album</button>
+            <form action="editar_mail.php">
+                <button type="submit" class="btn btn-dark float-center mt-3">Editar mail</button>
             </form> 
         </div>       
-         
+        <div>
+            <form action="borrar_cuenta.php">
+                <button type="submit" class="btn btn-dark float-center mt-3">Borrar Cuenta</button>
+            </form> 
+        </div>   
     </div>    
 </body>
 </html>

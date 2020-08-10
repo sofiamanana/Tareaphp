@@ -35,8 +35,14 @@
     <title>Poyofy</title>
 </head>
 <body>
-    <div id="titleN">
+<div id="titleN">
+    <form action="inicio_artista.php">
+            <p id="par">
+                <button type="submit" class="btn btn-dark float-right mr-3 ml-3">Inicio</button>
+            </p>
+        </form>
         <h1>Poyofy Editar Usuario</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">
@@ -44,7 +50,7 @@
                 <label for="exampleInputEmail1">Ingrese una nuevo nombre:</label>
                 <input type="text" class="form-control" aria-describedby="emailHelp" name="nuevo_nombre">
             </div>         
-            <button type="submit" class="butn btn-primary mt-3">Actualizar</button>   
+            <button type="submit" class="btn btn-dark mt-3">Actualizar</button>   
         </form>
     </div>    
 </body>

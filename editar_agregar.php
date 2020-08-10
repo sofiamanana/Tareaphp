@@ -32,22 +32,28 @@
             if(isset($_POST[$nom_alb])){
                 break;
             }
-        }
-
-        $sql = "SELECT * FROM Albumes WHERE Nom_Album = ?;";
-        $sentencia = $pdo->prepare($sql);
-        $sentencia->execute(array($nom_alb));
-        $sen = $sentencia->fetchAll();
-
-        $id_album = $sen[0]['ID_Album'];
+        }       
 
         foreach($canciones as $can){
+
+            $sql = "SELECT * FROM Albumes WHERE Nom_Album = ?;";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($nom_alb));
+            $sen = $sentencia->fetchAll();
+
+            $id_album = $sen[0]['ID_Album'];
+            $cant_can = $sen[0]['Cant_Canciones'];
+
             $nom_can = $can['Nom_Cancion'];
             if(isset($_POST[$nom_can])){
                 $sql = "UPDATE Canciones SET ID_Album = ? WHERE Nom_Cancion = ?;";
                 $sentencia = $pdo->prepare($sql);
                 $sentencia->execute(array($id_album,$nom_can));
 
+                $sql = "UPDATE Albumes SET Cant_Canciones = ? WHERE ID_Album = ?;";
+                $sentencia = $pdo->prepare($sql);
+                $sentencia->execute(array($cant_can+1,$id_album));
+                
             }
         }
         unset($_POST);
@@ -74,6 +80,7 @@
             </p>
         </form>
         <h1>Poyofy Editar Album</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">

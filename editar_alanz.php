@@ -27,7 +27,7 @@
             foreach($albums as $alb){
                 $nom_alb = $alb['Nom_Album'];
                 if(isset($_POST[$nom_alb])){
-                    $sql = "UPDATE `Albumes` SET `A_LanzamientoA` = ? WHERE Nom_Album = ?;";
+                    $sql = "UPDATE `Albumes` SET `A_Lanzamiento` = ? WHERE Nom_Album = ?;";
                     $sentencia = $pdo->prepare($sql);
                     $sentencia->execute(array($nuevo_a,$nom_alb));
 
@@ -56,7 +56,13 @@
 </head>
 <body>
     <div id="titleN">
+        <form action="inicio_artista.php">
+                <p id="par">
+                    <button type="submit" class="btn btn-dark float-right mr-3 ml-3">Inicio</button>
+                </p>
+            </form>
         <h1>Poyofy Editar Album</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">
@@ -73,7 +79,7 @@
                 <label for="exampleInputEmail1">Ingrese una nuevo año de lanzamiento:</label>
                 <input type="text" class="form-control" aria-describedby="emailHelp" name="nuevo_a">
             </div>         
-            <button type="submit" class="butn btn-primary mt-3">Actualizar</button>   
+            <button type="submit" class="btn btn-dark mt-3">Actualizar</button>   
         </form>
     </div>    
 </body>

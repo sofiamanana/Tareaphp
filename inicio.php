@@ -1,8 +1,6 @@
 <?php
     include_once "conexion.php";
-    session_start();
-
-    
+    session_start();    
 ?>
 
 <!DOCTYPE html>
@@ -17,17 +15,21 @@
     </head>
     <body>
         <div id="titleN">
-        <form action="index.php">
+        <form action="cerrar_sesion.php">
             <p id="par">
                 <button type="submit" class="btn btn-dark float-left ml-3">Log Out</button>
             </p>
         </form>
             <h1>POYOFY</h1>
             <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
+            
         </div>
         <div>
             <form action="ver_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver mis Playlist</button>
+            </form>
+            <form action="ver_playlistAll.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Todas las Playlist</button>
             </form>
             <form action="crear_playlist.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Crear Playlist</button>
@@ -37,6 +39,21 @@
             </form>
             <form action="canciones_MG.php">
                 <button type="submit" class="btn btn-success float-left mt-3 ml-3">Canciones que MG</button>
+            </form>
+            <form action="ver_canciones.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Todas las Canciones</button>
+            </form>
+            <form action="ver_albums.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Albums</button>
+            </form>
+            <form action="ver_personasSigo.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Personas que Sigo</button>
+            </form>
+            <form action="editar_cuenta_usuario.php">
+                <button type="submit" class="btn btn-success float-right mt-3">Configuración</button>
+            </form>
+            <form action="ver_personas.php">
+                <button type="submit" class="btn btn-success float-left mt-3 ml-3">Ver Personas</button>
             </form>
             
         </div>

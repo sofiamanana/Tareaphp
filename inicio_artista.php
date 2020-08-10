@@ -1,7 +1,6 @@
 <?php
-    session_start();
-
-    
+    include_once "conexion.php";
+    session_start();    
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +15,7 @@
     </head>
     <body>
         <div id="titleN">
-            <form action="index.php">
+            <form action="cerrar_sesion.php">
                 <p id="par">
                     <button type="submit" class="btn btn-dark float-right ml-3">Log Out</button>
                 </p>
@@ -42,6 +41,18 @@
             </form>
             <form action="editar_cancion.php">
                 <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Editar Canciones</button>
+            </form>
+            <form action="ver_alb_artista.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Mis Albums y Canciones</button>
+            </form>
+            <form action="ver_albums.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Todos Albums</button>
+            </form>
+            <form action="ver_canciones.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Todas Canciones</button>
+            </form>
+            <form action="ver_personas.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Personas</button>
             </form>
         </div>
     </body>

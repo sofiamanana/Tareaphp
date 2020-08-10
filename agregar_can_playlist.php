@@ -48,10 +48,24 @@
         foreach($canciones as $can){
             $nom_cancion = $can['Nom_Cancion'];
             if(isset($_POST[$nom_cancion])){
-                
-                $sql = "INSERT INTO Playlist_Contiene (ID_Playlist,ID_Cancion) VALUES (?,?);";
+
+                $sql = "SELECT * FROM Playlist_Contiene WHERE ID_Playlist = ? AND ID_Cancion = ?;";
                 $sentencia = $pdo->prepare($sql);
                 $sentencia->execute(array($id_playlist,$can['ID_Cancion']));
+                $sen = $sentencia->fetchAll();
+
+                if(count($sen)==0){
+                    $sql = "INSERT INTO Playlist_Contiene (ID_Playlist,ID_Cancion) VALUES (?,?);";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id_playlist,$can['ID_Cancion']));
+
+                    $sql = "UPDATE Playlist SET Cant_Canciones = Cant_Canciones+1 WHERE ID_Playlist = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id_playlist));
+
+                }
+                
+                
             }
         }
         header('location:editar_playlist.php');
@@ -77,6 +91,7 @@
             </p>
         </form>
         <h1>Poyofy Editar Playlist</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">
@@ -97,18 +112,12 @@
             <p>Seleccione canciones para agregar: </p>
             <div class="form-group">
                 <?php foreach($canciones as $can):     
-                    $id_cancion = $can["ID_Cancion"];
-                    $sql = "SELECT * FROM Playlist_Contiene WHERE ID_Cancion = ?;";
-                    $sentencia = $pdo->prepare($sql);
-                    $sentencia->execute(array($id_cancion));
-                    $sen = $sentencia->fetchAll();
-                    
-                    if(count($sen)==0): ?>
+                    ?>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="<?php echo $can['Nom_Cancion']; ?>">
                             <label class="form-check-label" for="exampleCheck1"><?php echo $can['Nom_Cancion']; ?></label>
                         </div> 
-                    <?php endif;
+                    <?php 
                 endforeach; ?>
             </div>
                     

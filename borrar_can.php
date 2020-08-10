@@ -2,6 +2,7 @@
     include_once "conexion.php";
     session_start();
 
+    
     $sql = "SELECT * FROM personas WHERE Usuario = ?;";
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute(array($_SESSION['usuario']));
@@ -9,35 +10,64 @@
 
     $id_persona = $sen[0]['ID_PERSONA'];
 
-    $sql = "SELECT * FROM Artistas WHERE ID_PERSONA = ?;";
+    $sql = "SELECT * FROM Usuarios WHERE ID_PERSONA = ?;";
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute(array($id_persona));
     $sen = $sentencia->fetchAll();
-    
-    $id_artista = $sen[0]['ID_Artista'];
-    
-    $sql = "SELECT * FROM Canciones WHERE ID_Artista = ?;";
-    $sentencia = $pdo->prepare($sql);
-    $sentencia->execute(array($id_artista));
-    $canciones = $sentencia->fetchAll();
-    var_dump($_POST);
-    
-    if(isset($_POST)){        
-        if(count($_POST)==1){  
 
-            foreach($canciones as $can){
-                $nom_can = $can['Nom_Cancion'];
-                if(isset($_POST[$nom_can])){
-                    $sql = "DELETE FROM Canciones WHERE Nom_Cancion = ?;";
-                    $sentencia = $pdo->prepare($sql);
-                    $sentencia->execute(array($nom_can));
-                }
+    $id_usuario = $sen[0]['ID_Usuario'];
+
+    $sql = "SELECT ID_Playlist FROM Usuario_Crea WHERE ID_Usuario = ?;";
+    $sentencia = $pdo->prepare($sql);
+    $sentencia->execute(array($id_usuario));
+    $ids_play = $sentencia->fetchAll();
+
+    $sql = "SELECT * FROM Playlist_Contiene;";
+    $sentencia = $pdo->prepare($sql);
+    $sentencia->execute();
+    $play_contiene = $sentencia->fetchAll();
+
+    $sql = "SELECT * FROM Canciones;";
+    $sentencia = $pdo->prepare($sql);
+    $sentencia->execute();
+    $canciones = $sentencia->fetchAll();
+    if($_POST){
+        foreach($ids_play as $id){
+            $sql = "SELECT * FROM Playlist WHERE ID_Playlist = ?;";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($id['ID_Playlist']));
+            $sen = $sentencia->fetchAll();
+            $nom_playlist = $sen[0]['Nom_Playlist'];
+            $id_playlist = $id['ID_Playlist'];
+            if(isset($_POST[$nom_playlist])){
+                break;
             }
-            /*
-            header('location:borrar_can.php');*/
         }       
+        
+        foreach($canciones as $can){
+            $nom_cancion = $can['Nom_Cancion'];
+            if(isset($_POST[$nom_cancion])){
+
+                $sql = "SELECT * FROM Playlist_Contiene WHERE ID_Playlist = ? AND ID_Cancion = ?;";
+                $sentencia = $pdo->prepare($sql);
+                $sentencia->execute(array($id_playlist,$can['ID_Cancion']));
+                $sen = $sentencia->fetchAll();
+                
+
+                if(count($sen)!=0){
+                    $sql = "DELETE FROM Playlist_Contiene WHERE ID_Playlist = ? AND ID_Cancion = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id_playlist,$can['ID_Cancion']));
+
+                    $sql = "UPDATE Playlist SET Cant_Canciones = Cant_Canciones-1 WHERE ID_Playlist = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id_playlist));
+                }               
+            }
+        }
+        unset($_POST);
+        header('location:editar_playlist.php');
     }
-    
 ?>
 
 <!DOCTYPE html>
@@ -52,20 +82,41 @@
 </head>
 <body>
     <div id="titleN">
+    <form action="inicio.php">
+            <p id="par">
+                <button type="submit" class="btn btn-dark float-right mr-3 ml-3">Inicio</button>
+            </p>
+        </form>
         <h1>Poyofy Editar Cancion</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">
-            <p>Seleccione cancion: </p>
+        <p>Seleccione playlist: </p>
             <div class="form-group">
-                <?php foreach($canciones as $can): ?>
+                <?php foreach($ids_play as $id): 
+                    $sql = "SELECT * FROM Playlist WHERE ID_Playlist = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id['ID_Playlist']));
+                    $sen = $sentencia->fetchAll();
+                    ?>
                     <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="<?php echo $can['Nom_Cancion']; ?>">
-                        <label class="form-check-label" for="exampleCheck1"><?php echo $can['Nom_Cancion']; ?></label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="<?php echo $sen[0]['Nom_Playlist']; ?>">
+                        <label class="form-check-label" for="exampleCheck1"><?php echo $sen[0]['Nom_Playlist']; ?></label>
                     </div>
                 <?php endforeach; ?>
             </div>
-                 
+            <p>Seleccione canciones para agregar: </p>
+            <div class="form-group">
+                <?php foreach($canciones as $can):     
+                    ?>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1" value="1" name="<?php echo $can['Nom_Cancion']; ?>">
+                            <label class="form-check-label" for="exampleCheck1"><?php echo $can['Nom_Cancion']; ?></label>
+                        </div> 
+                    <?php 
+                endforeach; ?>
+            </div>     
             <button type="submit" class="butn btn-dark mt-3">Borrar</button>   
         </form>
     </div>    

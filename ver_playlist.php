@@ -68,11 +68,36 @@
                     $sentencia = $pdo->prepare($sql);
                     $sentencia->execute(array($id['ID_Playlist']));
                     $sen = $sentencia->fetchAll();
+
+                    $sql = "SELECT * FROM Playlist_Contiene WHERE ID_Playlist = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id['ID_Playlist']));
+                    $play_contiene = $sentencia->fetchAll();
                     ?>
                     <div>
-                        <p class="mt-3 ml-3" style="font-size:17px; color:white; text-align:left">* <?php echo $sen[0]['Nom_Playlist']; ?></p>
+                        <p class="mt-3 ml-3" style="font-size:17px; color:#1DB954; text-align:left">* <?php echo $sen[0]['Nom_Playlist']; ?></p>
                     </div>
-                <?php endforeach; ?>
+                <?php foreach($play_contiene as $play):
+                    $sql = "SELECT * FROM Canciones WHERE ID_Cancion = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($play['ID_Cancion']));
+                    $can = $sentencia->fetchAll();
+
+                    $sql = "SELECT * FROM personas WHERE ID_PERSONA = (SELECT ID_PERSONA FROM Artistas WHERE ID_Artista = ?);";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($can[0]['ID_Artista']));
+                    $sen = $sentencia->fetchAll();
+                    $artista = $sen[0];
+
+
+                ?>
+                <div>
+                    <p class="mt-3 ml-3" style="font-size:17px; color:white; text-align:left">   - <?php echo $can[0]['Nom_Cancion']; ?> - <?php echo $artista['Nombre'];?> <?php echo $artista['Apellido'];?></p>
+                </div>
+            
+            
+                <?php endforeach;
+            endforeach; ?>
             </div>  
         </div>
     </body>

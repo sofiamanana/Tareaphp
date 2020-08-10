@@ -58,6 +58,7 @@
 <body>
     <div id="titleN">
         <h1>Poyofy Editar Cancion</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">

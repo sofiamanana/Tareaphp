@@ -6,10 +6,17 @@
         $cant_mg = 0;
         $nombre_can = $_POST['nom_can'];
         $a_laz = $_POST['año_lanz'];
+
+        $sql = "SELECT * FROM personas WHERE Usuario = ?;";
+        $sentencia = $pdo->prepare($sql);
+        $sentencia->execute(array($_SESSION['usuario']));
+        $sen = $sentencia->fetchAll();
+
+        $id_persona = $sen[0]['ID_PERSONA'];
         
         $sql = "SELECT * FROM Artistas WHERE ID_PERSONA = ?;";
         $sentencia = $pdo->prepare($sql);
-        $sentencia->execute(array($_SESSION['id_persona']));
+        $sentencia->execute(array($id_persona));
         $sen = $sentencia->fetchAll();
         $id_artista = $sen[0]['ID_Artista'];
 
@@ -63,6 +70,7 @@
                 </p>
             </form>
         <h1>Poyofy agregar canciones</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">

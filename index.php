@@ -9,8 +9,6 @@
         $_SESSION['usuario'] = $usuario;
         $_SESSION['password'] = $password;
 
-        //casos: usuario no existe, contraseña no calza con el usuario
-
         $sql = "SELECT * FROM personas WHERE Usuario = ?;";
         $sentencia = $pdo->prepare($sql);
         $sentencia->execute(array($usuario));

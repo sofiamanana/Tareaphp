@@ -20,7 +20,6 @@
     $sentencia = $pdo->prepare($sql);
     $sentencia->execute();
     $canciones = $sentencia->fetchAll();
-    var_dump($_POST);
     if($_POST){
         $nom_playlist = $_POST['nom_playlist'];
 
@@ -41,7 +40,7 @@
     
             $id_playlist = $sen[0]['ID_Playlist'];
             
-            $sql = "INSERT INTO Usuario_Crea (ID_Usuario,ID_Playlist) VALUES (?,?);";
+            $sql = "INSERT INTO Usuario_Crea (ID_Usuario,ID_Playlist,Cant_Canciones,Cant_Seguidores) VALUES (?,?,0,0);";
             $sentencia = $pdo->prepare($sql);
             $sentencia->execute(array($id_usuario,$id_playlist));
     
@@ -55,9 +54,13 @@
     
                     $id_cancion = $sen[0]['ID_Cancion'];
     
-                    $sql = "INSERT INTO Playlist_Contiene (ID_Playlist,ID_Cancion) VALUES (?,?);";
+                    $sql = "INSERT INTO Playlist_Contiene (ID_Playlist,ID_Cancion,Cant) VALUES (?,?);";
                     $sentencia = $pdo->prepare($sql);
                     $sentencia->execute(array($id_playlist,$id_cancion));
+
+                    $sql = "UPDATE Playlist SET Cant_Canciones = Cant_Canciones+1 WHERE ID_Playlist = ?;";
+                    $sentencia = $pdo->prepare($sql);
+                    $sentencia->execute(array($id_playlist));
     
                 }
             }
@@ -91,6 +94,7 @@
                 </p>
             </form>
         <h1>Poyofy Crear Playlist</h1>
+        <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
     </div>
     <div class="center">
         <form method="POST">

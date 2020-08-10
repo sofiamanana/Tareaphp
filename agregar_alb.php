@@ -27,21 +27,31 @@
         $sql = "INSERT INTO Albumes (ID_Artista,Nom_Album,Cant_Canciones,A_Lanzamiento) VALUES (?,?,?,?);";
         $sentencia = $pdo->prepare($sql);
         $sentencia->execute(array($id_artista,$nom_alb,0,$a_lanz));
-        $sql = "SELECT * FROM Albumes WHERE Nom_Album = ?;";
-        $sentencia = $pdo->prepare($sql);
-        $sentencia->execute(array($nom_alb));
-        $sen = $sentencia->fetchAll();
-        $id_album = $sen[0]['ID_Album'];
+        
 
-    }
     
-    if(isset($_POST)){
+    
+    
         foreach($canciones as $can){
+
+            $sql = "SELECT * FROM Albumes WHERE Nom_Album = ?;";
+            $sentencia = $pdo->prepare($sql);
+            $sentencia->execute(array($nom_alb));
+            $sen = $sentencia->fetchAll();
+            $id_album = $sen[0]['ID_Album'];
+
+            $cant_can = $sen[0]['Cant_Canciones'];
             $nom_can = $can['Nom_Cancion'];
+
             if(isset($_POST[$nom_can])){
                 $sql = "UPDATE Canciones SET ID_Album = ? WHERE Nom_Cancion = ?;";
                 $sentencia = $pdo->prepare($sql);
                 $sentencia->execute(array($id_album,$nom_can));
+
+                $sql = "UPDATE Albumes SET Cant_Canciones = ? WHERE ID_Album = ?;";
+                $sentencia = $pdo->prepare($sql);
+                $sentencia->execute(array($cant_can+1,$id_album));
+
                 header('location:inicio_artista.php');
             }
         }
