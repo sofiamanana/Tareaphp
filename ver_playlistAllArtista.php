@@ -39,7 +39,7 @@
     </head>
     <body>
         <div id="titleN">
-            <form action="inicio.php">
+            <form action="inicio_artista.php">
                 <p id="par">
                     <button type="submit" class="btn btn-dark float-right ml-3">Inicio</button>
                 </p>

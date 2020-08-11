@@ -24,9 +24,7 @@
                 <h1>POYOFY</h1>           
             
                 <p style="font-size:17px; color: white;"> Hola <?php echo $_SESSION['usuario'];?>!</p>
-                <form action="editar_cuenta.php">
-                    <button type="submit" class="btn btn-success float-right mt-3">Configuración</button>
-                </form>
+                
         </p>
         </div>
         <div>
@@ -53,6 +51,12 @@
             </form>
             <form action="ver_personas.php">
                 <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Personas</button>
+            </form>
+            <form action="ver_playlistAllArtista.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Ver Playlist</button>
+            </form>
+            <form action="editar_cuenta.php">
+                <button type="submit" class="btn btn-success mt-3 ml-3 float-left">Configuración</button>
             </form>
         </div>
     </body>
